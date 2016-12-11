@@ -1,0 +1,28 @@
+{
+  "name": "chadomatcher",
+  "version": "0.0.1",
+  "description": "Matcher utility. You can define rules for matching specific objects and types",
+  "main": "lib/matcher.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "scripts": {
+    "test": "grunt test"
+  },
+  "devDependencies": {
+    "grunt": "^1",
+    "grunt-eslint": "^18",
+    "grunt-mocha-istanbul": "^4.0.0",
+    "istanbul": ">=0.4",
+    "mocha": ">3",
+    "must": "^0.13.0"
+  },
+  "keywords": [
+    "matcher",
+    "match",
+    "object",
+    "type"
+  ],
+  "author": "Robin Danzinger",
+  "license": "MIT"
+}
