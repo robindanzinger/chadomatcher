@@ -184,7 +184,7 @@ describe('Library "matcher"', function () {
       /aregex/gi
     ]);
   });
-  it('anyArray but not empty matches any array', function () {
+  it('empty.array matches any empty array', function () {
     shouldNotMatch(matchers.empty.array, [
       undefined,
       null,
