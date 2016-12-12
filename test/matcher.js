@@ -157,8 +157,10 @@ describe('Library "matcher"', function () {
     shouldMatch(matchers.anyArray, [
       [],
       [1, 2, 3],
+      /*eslint-disable */
       new Array(),
       new Array('foo', 2, 'bar')
+      /*eslint-enable */
     ]);
   });
   it('anyObject matches any object', function () {
@@ -174,10 +176,30 @@ describe('Library "matcher"', function () {
       [],
       [1, 2, 3],
       new Date(),
+      /*eslint-disable */
       new Object(),
       new String(),
+      /*eslint-enable */
       {foo: 'bar'},
       /aregex/gi
-    ]); 
+    ]);
+  });
+  it('anyArray but not empty matches any array', function () {
+    shouldNotMatch(matchers.empty.array, [
+      undefined,
+      null,
+      {foo: 'bar'},
+      1,
+      Date.now(),
+      'a string',
+      [1],
+      [1, 2, 3]
+    ]);
+    shouldMatch(matchers.empty.array, [
+      [],
+      /*eslint-disable */
+      new Array()
+      /*eslint-enable */
+    ]);
   });
 });
