@@ -101,4 +101,24 @@ describe('Library "matcher"', function () {
       new Date(0)
     ]);
   });
+  it('anyString matches any String', function () {
+    shouldNotMatch(matchers.anyString, [
+      undefined,
+      null,
+      {foo: 'bar'},
+      1,
+      [1, 2, 3],
+      Date.now(),
+      /aregexstring/gi
+    ]);
+    shouldMatch(matchers.anyString, [
+      '',
+      'a string',
+      new Date().toString(),
+      /*eslint-disable */
+      new String(),
+      new String('foo')
+      /*eslint-enable */
+    ]);
+  });
 });
