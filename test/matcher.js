@@ -85,4 +85,20 @@ describe('Library "matcher"', function () {
       Number.NaN
     ]);
   });
+  it('anyDate matches any Date', function () {
+    shouldNotMatch(matchers.anyDate, [
+      undefined,
+      null,
+      'a string',
+      {},
+      1,
+      [1, 2, 3],
+      Date.now()
+    ]);
+    shouldMatch(matchers.anyDate, [
+      new Date(),
+      new Date(1999, 12, 31),
+      new Date(0)
+    ]);
+  });
 });
