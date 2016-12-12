@@ -145,4 +145,39 @@ describe('Library "matcher"', function () {
       new RegExp('aregex', 'gim')
     ]);
   });
+  it('anyArray matches any array', function () {
+    shouldNotMatch(matchers.anyArray, [
+      undefined,
+      null,
+      {foo: 'bar'},
+      1,
+      Date.now(),
+      'a string'
+    ]);
+    shouldMatch(matchers.anyArray, [
+      [],
+      [1, 2, 3],
+      new Array(),
+      new Array('foo', 2, 'bar')
+    ]);
+  });
+  it('anyObject matches any object', function () {
+     shouldNotMatch(matchers.anyObject, [
+      undefined,
+      null,
+      1,
+      Date.now(),
+      'a string'
+    ]);
+    shouldMatch(matchers.anyObject, [
+      {},
+      [],
+      [1, 2, 3],
+      new Date(),
+      new Object(),
+      new String(),
+      {foo: 'bar'},
+      /aregex/gi
+    ]); 
+  });
 });
