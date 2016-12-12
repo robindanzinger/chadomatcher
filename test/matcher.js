@@ -4,40 +4,26 @@ var expect = require('must');
 var matchers = require('../lib/matcher');
 
 function shouldMatch(matcher, values) {
-  var errors = [];
-  values.forEach(function(value) {
-    try {
-      expect(matcher.matches(value)).to.be.true();
-    } catch (error) {
-      if (error.name === 'AssertionError') {
-        var message = 'should match ' + value + ' but didn\'t.';
-        errors.push(message);
-      } else {
-        throw error;
-      }
-    }
-  });
-  handleOptionalErrors(errors);
+  handleBlockAssertion('true', matcher, values, 'should match %1 but didn\'t.');
 }
 
 function shouldNotMatch(matcher, values) {
+  handleBlockAssertion('false', matcher, values, 'shouldn\'t match %1 but did.');
+}
+
+function handleBlockAssertion(assertionFunc, matcher, values, message) {
   var errors = [];
   values.forEach(function(value) {
     try {
-      expect(matcher.matches(value)).to.be.false();
+      expect(matcher.matches(value)).to.be[assertionFunc]();
     } catch (error) {
       if (error.name === 'AssertionError') {
-        var message = 'shouldn\'t match ' + value + ' but did.';
-        errors.push(message);
+        errors.push(message.replace('%1', value));
       } else {
         throw error;
       }
     }
   });
-  handleOptionalErrors(errors);
-}
-
-function handleOptionalErrors(errors) {
   if (errors.length > 0) {
     throw new Error(errors.join(',\n'));
   }
@@ -88,7 +74,6 @@ describe('Library "matcher"', function () {
       Number.NEGATIVE_INFINITY,
       Number.POSITIVE_INFINITY
     ]);
-
     shouldNotMatch(matchers.anyNumber, [
       undefined,
       null,
