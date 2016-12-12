@@ -121,4 +121,25 @@ describe('Library "matcher"', function () {
       /*eslint-enable */
     ]);
   });
+  it('anyRegex matches any Regex', function () {
+    shouldNotMatch(matchers.anyRegex, [
+      undefined,
+      null,
+      {foo: 'bar'},
+      1,
+      [1, 2, 3],
+      Date.now(),
+      'a string'
+    ]);
+    shouldMatch(matchers.anyRegex, [
+      /aregex/gi,
+      /aregex/,
+      / /,
+      /\*/,
+      new RegExp('', ''),
+      new RegExp(),
+      new RegExp('aregex'),
+      new RegExp('aregex', 'gim')
+    ]);
+  });
 });
