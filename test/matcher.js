@@ -202,4 +202,98 @@ describe('Library "matcher"', function () {
       /*eslint-enable */
     ]);
   });
+  it('not.empty.array matches any non empty array', function () {
+    shouldNotMatch(matchers.not.empty.array, [
+      undefined,
+      null,
+      /*eslint-disable */
+      new Array(),
+      /*eslint-enable */
+      [],
+    ]);
+    shouldMatch(matchers.not.empty.array, [
+      ['foo'],
+      /*eslint-disable */
+      new Array(1, 2, 3)
+      /*eslint-enable */
+    ]);
+  });
+  it('array.ofLength(n) matches any array with n elements', function () {
+    shouldNotMatch(matchers.array.ofLength(3), [
+      undefined,
+      null,
+      [1, 2],
+      [1, 2, 3, 4]
+    ]);
+    shouldMatch(matchers.array.ofLength(3), [
+      [1, 2, 3]
+    ]);
+    expect(matchers.array.ofLength(1).matches([1])).to.be.true();
+    expect(matchers.array.ofLength(1).matches([1, 2])).to.be.false();
+  });
+  it('array.withMoreThan(n).elements matches any array with more than n elements', function () {
+    shouldNotMatch(matchers.array.withMoreThan(3).elements, [
+      undefined,
+      null,
+      [1, 2],
+      [1, 2, 3]
+    ]);
+    shouldMatch(matchers.array.withMoreThan(3).elements, [
+      [1, 2, 3, 4],
+      [1, 2, 3, 4, 5]
+    ]);
+    expect(matchers.array.withMoreThan(0).elements.matches([1])).to.be.true();
+    expect(matchers.array.withMoreThan(2).elements.matches([1, 2])).to.be.false();
+  });
+  it('array.withLessThan(n).elements matches any array with less than n elements', function () {
+    shouldNotMatch(matchers.array.withLessThan(3).elements, [
+      undefined,
+      null,
+      [1, 2, 3, 4],
+      [1, 2, 3]
+    ]);
+    shouldMatch(matchers.array.withLessThan(3).elements, [
+      [1, 2],
+      [1],
+      []
+    ]);
+    expect(matchers.array.withLessThan(2).elements.matches([1])).to.be.true();
+    expect(matchers.array.withLessThan(2).elements.matches([1, 2])).to.be.false();
+  });
+//  it('array.withMoreThan(n).elements.and.withLessThan(m).elements matches any array with less than n elements', function () {
+//    shouldNotMatch(matchers.array.withMoreThan(2).elements.and.withLessThan(4).elements, [
+//      undefined,
+//      null,
+//      [1, 2, 3, 4],
+//      [1, 2]
+//    ]);
+//    shouldMatch(matchers.array.withMoreThan(2).elements.and.withLessThan(4).elements, [
+//      [1, 2, 3],
+//    ]);
+//    shouldMatch(matchers.array.withLessThan(3).elements.and.withMoreThan(1).elements, [
+//      [1, 2],
+//    ]);
+//
+//    function foo () {
+//      return {bar: bar()};
+//    }
+//    function bar() {
+//      return {foo: foo()};
+//    }
+//    foo.bar;
+//  });
+  it('empty.string matches an empty string', function () {
+    shouldNotMatch(matchers.empty.string, [
+      undefined,
+      null,
+      'a non empty string',
+    ]);
+    shouldMatch(matchers.empty.string, [
+      '',
+      /*eslint-disable */
+      new String(),
+      new String('')
+      /*eslint-enable */
+    ]);
+  });
 });
