@@ -209,7 +209,7 @@ describe('Library "matcher"', function () {
       /*eslint-disable */
       new Array(),
       /*eslint-enable */
-      [],
+      []
     ]);
     shouldMatch(matchers.not.empty.array, [
       ['foo'],
@@ -286,7 +286,7 @@ describe('Library "matcher"', function () {
     shouldNotMatch(matchers.empty.string, [
       undefined,
       null,
-      'a non empty string',
+      'a non empty string'
     ]);
     shouldMatch(matchers.empty.string, [
       '',
