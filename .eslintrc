@@ -3,6 +3,12 @@
   "env": {
     "node": true
   },
+  "parserOptions":{
+    "ecmaVersion": 6,
+    "ecmaFeatures": {
+      "experimentalObjectRestSpread": true
+    }
+  },
   "rules": {
     "quotes": [ 2, "single"],
     "no-sync": 2,
