@@ -260,28 +260,20 @@ describe('Library "matcher"', function () {
     expect(matchers.array.withLessThan(2).elements.matches([1])).to.be.true();
     expect(matchers.array.withLessThan(2).elements.matches([1, 2])).to.be.false();
   });
-//  it('array.withMoreThan(n).elements.and.withLessThan(m).elements matches any array with less than n elements', function () {
-//    shouldNotMatch(matchers.array.withMoreThan(2).elements.and.withLessThan(4).elements, [
-//      undefined,
-//      null,
-//      [1, 2, 3, 4],
-//      [1, 2]
-//    ]);
-//    shouldMatch(matchers.array.withMoreThan(2).elements.and.withLessThan(4).elements, [
-//      [1, 2, 3],
-//    ]);
-//    shouldMatch(matchers.array.withLessThan(3).elements.and.withMoreThan(1).elements, [
-//      [1, 2],
-//    ]);
-//
-//    function foo () {
-//      return {bar: bar()};
-//    }
-//    function bar() {
-//      return {foo: foo()};
-//    }
-//    foo.bar;
-//  });
+  it('array.withMoreThan(n).elements.and.withLessThan(m).elements matches any array with less than n elements', function () {
+    shouldNotMatch(matchers.array.withMoreThan(2).elements.and.withLessThan(4).elements, [
+      undefined,
+      null,
+      [1, 2, 3, 4],
+      [1, 2]
+    ]);
+    shouldMatch(matchers.array.withMoreThan(2).elements.and.withLessThan(4).elements, [
+      [1, 2, 3]
+    ]);
+    shouldMatch(matchers.array.withLessThan(3).elements.and.withMoreThan(1).elements, [
+      [1, 2]
+    ]);
+  });
   it('string.empty matches an empty string', function () {
     shouldNotMatch(matchers.string.empty, [
       undefined,
