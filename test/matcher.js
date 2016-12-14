@@ -184,8 +184,8 @@ describe('Library "matcher"', function () {
       /aregex/gi
     ]);
   });
-  it('empty.array matches any empty array', function () {
-    shouldNotMatch(matchers.empty.array, [
+  it('array.empty matches any empty array', function () {
+    shouldNotMatch(matchers.array.empty, [
       undefined,
       null,
       {foo: 'bar'},
@@ -195,15 +195,15 @@ describe('Library "matcher"', function () {
       [1],
       [1, 2, 3]
     ]);
-    shouldMatch(matchers.empty.array, [
+    shouldMatch(matchers.array.empty, [
       [],
       /*eslint-disable */
       new Array()
       /*eslint-enable */
     ]);
   });
-  it('not.empty.array matches any non empty array', function () {
-    shouldNotMatch(matchers.not.empty.array, [
+  it('array.notEmpty matches any non empty array', function () {
+    shouldNotMatch(matchers.array.notEmpty, [
       undefined,
       null,
       /*eslint-disable */
@@ -211,25 +211,25 @@ describe('Library "matcher"', function () {
       /*eslint-enable */
       []
     ]);
-    shouldMatch(matchers.not.empty.array, [
+    shouldMatch(matchers.array.notEmpty, [
       ['foo'],
       /*eslint-disable */
       new Array(1, 2, 3)
       /*eslint-enable */
     ]);
   });
-  it('array.ofLength(n) matches any array with n elements', function () {
-    shouldNotMatch(matchers.array.ofLength(3), [
+  it('array.withExact(n).elements matches any array with n elements', function () {
+    shouldNotMatch(matchers.array.withExact(3).elements, [
       undefined,
       null,
       [1, 2],
       [1, 2, 3, 4]
     ]);
-    shouldMatch(matchers.array.ofLength(3), [
+    shouldMatch(matchers.array.withExact(3).elements, [
       [1, 2, 3]
     ]);
-    expect(matchers.array.ofLength(1).matches([1])).to.be.true();
-    expect(matchers.array.ofLength(1).matches([1, 2])).to.be.false();
+    expect(matchers.array.withExact(1).elements.matches([1])).to.be.true();
+    expect(matchers.array.withExact(1).elements.matches([1, 2])).to.be.false();
   });
   it('array.withMoreThan(n).elements matches any array with more than n elements', function () {
     shouldNotMatch(matchers.array.withMoreThan(3).elements, [
@@ -242,7 +242,7 @@ describe('Library "matcher"', function () {
       [1, 2, 3, 4],
       [1, 2, 3, 4, 5]
     ]);
-    expect(matchers.array.withMoreThan(0).elements.matches([1])).to.be.true();
+    expect(matchers.anyArray.withMoreThan(0).elements.matches([1])).to.be.true();
     expect(matchers.array.withMoreThan(2).elements.matches([1, 2])).to.be.false();
   });
   it('array.withLessThan(n).elements matches any array with less than n elements', function () {
@@ -282,13 +282,13 @@ describe('Library "matcher"', function () {
 //    }
 //    foo.bar;
 //  });
-  it('empty.string matches an empty string', function () {
-    shouldNotMatch(matchers.empty.string, [
+  it('string.empty matches an empty string', function () {
+    shouldNotMatch(matchers.string.empty, [
       undefined,
       null,
       'a non empty string'
     ]);
-    shouldMatch(matchers.empty.string, [
+    shouldMatch(matchers.string.empty, [
       '',
       /*eslint-disable */
       new String(),
