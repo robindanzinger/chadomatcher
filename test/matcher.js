@@ -286,7 +286,7 @@ describe('Library "matcher"', function () {
       [4, 3, 2, 1]
     ]);
   });
-  it('a matcher can be negated with not', function () {
+  it('a filter can be negated with not', function () {
     shouldNotMatch(matchers.array.not.containing(1, 2, 4), [
       [1, 2, 4]
     ]);
