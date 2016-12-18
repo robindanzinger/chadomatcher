@@ -275,7 +275,7 @@ describe('Library "matcher"', function () {
       [1, 2]
     ]);
   });
-  it('array.containing(a,b,c) matches any array containing a b and c', function ()  {
+  it('array.containing(a,b,c) matches any array containing a b and c', function () {
     shouldNotMatch(matchers.array.containing(1, 2, 4), [
       [1, 2, 3],
       [1, 2]
@@ -284,6 +284,21 @@ describe('Library "matcher"', function () {
       [1, 2, 4],
       [1, 2, 3, 4],
       [4, 3, 2, 1]
+    ]);
+  });
+  it('a matcher can be negated with not', function () {
+    shouldNotMatch(matchers.array.not.containing(1, 2, 4), [
+      [1, 2, 4]
+    ]);
+    shouldMatch(matchers.array.not.containing(1, 2, 4), [
+      [1, 2, 3]
+    ]);
+    shouldNotMatch(matchers.array.not.withLessThan(2).and.not.withMoreThan(2).elements, [
+      [1],
+      [1, 2, 3]
+    ]);
+    shouldMatch(matchers.array.not.withLessThan(2).and.not.withMoreThan(2).elements, [
+      [1, 2]
     ]);
   });
   it('string.empty matches an empty string', function () {
