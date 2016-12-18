@@ -229,6 +229,7 @@ describe('Library "matcher"', function () {
       [1, 2, 3]
     ]);
     expect(matchers.array.withExact(1).elements.matches([1])).to.be.true();
+    expect(matchers.array.withExact(1).matches([1])).to.be.true();
     expect(matchers.array.withExact(1).elements.matches([1, 2])).to.be.false();
   });
   it('array.withMoreThan(n).elements matches any array with more than n elements', function () {
@@ -272,6 +273,17 @@ describe('Library "matcher"', function () {
     ]);
     shouldMatch(matchers.array.withLessThan(3).elements.and.withMoreThan(1).elements, [
       [1, 2]
+    ]);
+  });
+  it('array.containing(a,b,c) matches any array containing a b and c', function ()  {
+    shouldNotMatch(matchers.array.containing(1, 2, 4), [
+      [1, 2, 3],
+      [1, 2]
+    ]);
+    shouldMatch(matchers.array.containing(1, 2, 4), [
+      [1, 2, 4],
+      [1, 2, 3, 4],
+      [4, 3, 2, 1]
     ]);
   });
   it('string.empty matches an empty string', function () {
