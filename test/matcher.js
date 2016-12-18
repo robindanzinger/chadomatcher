@@ -300,6 +300,9 @@ describe('Library "matcher"', function () {
     shouldMatch(matchers.array.not.withLessThan(2).and.not.withMoreThan(2).elements, [
       [1, 2]
     ]);
+    expect(matchers.array.containing('foo').and.not.containing('bar').matches([1, 2, 'foo'])).to.be.true();
+    expect(matchers.array.containing('foo').and.not.containing('bar').matches([1, 2, 'bar'])).to.be.false();
+    expect(matchers.array.containing('foo').and.not.containing('bar').matches(['foo', 'bar'])).to.be.false();
   });
   it('string.empty matches an empty string', function () {
     shouldNotMatch(matchers.string.empty, [
