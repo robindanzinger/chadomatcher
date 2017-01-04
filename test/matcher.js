@@ -87,7 +87,10 @@ describe('Library "matcher"', function () {
       [1, 2, 3],
       {},
       {foo: 'bar'},
-      Number.NaN
+      Number.NaN,
+      /*eslint-disable */
+      new Number(1)
+      /*eslint-enable */
     ]);
   });
   it('anyDate matches any Date', function () {
