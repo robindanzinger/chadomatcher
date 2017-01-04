@@ -291,6 +291,18 @@ describe('Library "matcher"', function () {
       [4, 3, 2, 1]
     ]);
   });
+  it('array.containingAny(a,b) matches any array containing a or b or both', function () {
+    shouldNotMatch(matchers.array.containingAny(1, 3), [
+      [2],
+      [0, 2, 4]
+    ]);
+    shouldMatch(matchers.array.containingAny(1, 3), [
+      [1],
+      [2, 3, 4],
+      [1, 3],
+      [0, 7, 8, 0, 1]
+    ]);
+  });
   it('a filter can be negated with not', function () {
     shouldNotMatch(matchers.array.not.containing(1, 2, 4), [
       [1, 2, 4]
