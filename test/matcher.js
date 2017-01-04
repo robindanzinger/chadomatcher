@@ -321,6 +321,18 @@ describe('Library "matcher"', function () {
     expect(matchers.array.containing('foo').and.not.containing('bar').matches([1, 2, 'bar'])).to.be.false();
     expect(matchers.array.containing('foo').and.not.containing('bar').matches(['foo', 'bar'])).to.be.false();
   });
+  it('array.not.containingAny(a,b) matches any array containing neither a nor b', function () {
+    shouldMatch(matchers.array.not.containingAny(1, 3), [
+      [2],
+      [0, 2, 4]
+    ]);
+    shouldNotMatch(matchers.array.not.containingAny(1, 3), [
+      [1],
+      [2, 3, 4],
+      [1, 3],
+      [0, 7, 8, 0, 1]
+    ]);
+  }); 
   it('string.empty matches an empty string', function () {
     shouldNotMatch(matchers.string.empty, [
       undefined,
