@@ -291,6 +291,17 @@ describe('Library "matcher"', function () {
       [4, 3, 2, 1]
     ]);
   });
+  it('array.containing(a,a) matches any array containing a at least twice', function () {
+    shouldNotMatch(matchers.array.containing(1, 1), [
+      [1],
+      [1, 2]
+    ]);
+    shouldMatch(matchers.array.containing(1, 1), [
+      [1, 1],
+      [1, 1, 1, 4],
+      [4, 1, 2, 1]
+    ]);
+  });
   it('array.containingAny(a,b) matches any array containing a or b or both', function () {
     shouldNotMatch(matchers.array.containingAny(1, 3), [
       [2],
@@ -332,7 +343,7 @@ describe('Library "matcher"', function () {
       [1, 3],
       [0, 7, 8, 0, 1]
     ]);
-  }); 
+  });
   it('string.empty matches an empty string', function () {
     shouldNotMatch(matchers.string.empty, [
       undefined,
