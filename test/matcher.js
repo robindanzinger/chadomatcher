@@ -75,7 +75,9 @@ describe('Library "matcher"', function () {
       Number.MIN_SAFE_INTEGER,
       Number.MIN_VALUE,
       Number.NEGATIVE_INFINITY,
-      Number.POSITIVE_INFINITY
+      Number.POSITIVE_INFINITY,
+      Number(1),
+      Number('123')
     ]);
     shouldNotMatch(matchers.anyNumber, [
       undefined,
