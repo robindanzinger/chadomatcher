@@ -77,7 +77,10 @@ describe('Library "matcher"', function () {
       Number.NEGATIVE_INFINITY,
       Number.POSITIVE_INFINITY,
       Number(1),
-      Number('123')
+      Number('123'),
+      /*eslint-disable */
+      new Number(1)
+      /*eslint-enable */
     ]);
     shouldNotMatch(matchers.anyNumber, [
       undefined,
@@ -87,10 +90,7 @@ describe('Library "matcher"', function () {
       [1, 2, 3],
       {},
       {foo: 'bar'},
-      Number.NaN,
-      /*eslint-disable */
-      new Number(1)
-      /*eslint-enable */
+      Number.NaN
     ]);
   });
   it('anyDate matches any Date', function () {
@@ -123,9 +123,12 @@ describe('Library "matcher"', function () {
       '',
       'a string',
       new Date().toString(),
+      Date(),
       /*eslint-disable */
+      String(),
+      String('foo'),
       new String(),
-      new String('foo')
+      new String('foo'),
       /*eslint-enable */
     ]);
   });
@@ -353,8 +356,8 @@ describe('Library "matcher"', function () {
     shouldMatch(matchers.string.empty, [
       '',
       /*eslint-disable */
-      new String(),
-      new String('')
+      String(),
+      String('')
       /*eslint-enable */
     ]);
   });
